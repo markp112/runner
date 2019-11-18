@@ -4,6 +4,8 @@ public class Runner {
 
     private int energy = 0;
     private int milesRun = 0;
+    private int hungerCounter = 0;
+    private int weeCounter = 0;
     private int  daysSlept = 0;
     private boolean isHungry = false;
     private boolean needsTheLoo = false;
@@ -35,10 +37,18 @@ public class Runner {
             return message;
         }
         this.milesRun += miles;
+        this.hungerCounter += miles;
+        this.weeCounter += miles;
         int energyImpact = miles / 2;
         this.energy -= energyImpact;
-        if(this.milesRun % 10 == 0) isHungry = true;
-        if(this.milesRun % 14 == 0) needsTheLoo = true;
+        if(this.hungerCounter > 10 ) {
+            this.isHungry = true;
+            this.hungerCounter = 0;
+        }
+        if(this.weeCounter > 14) {
+            this.needsTheLoo = true;
+            this.weeCounter = 0;
+        };
         if (checkIsDead()) {
             message = "The runner has died";
             return message;
